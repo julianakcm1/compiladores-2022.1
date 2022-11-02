@@ -1,4 +1,4 @@
-# compiladores-2022.1
-Analisador Léxico - Delphi - Compiladores
+# Compiladores
 
-- Equipe: Elyssana Oliveira, Juliana Melo e Kamila Benevides
+Equipe: Elyssana Oliveira, Juliana Melo e Kamila Benevides
+- Linguagem sorteada: Delphi
