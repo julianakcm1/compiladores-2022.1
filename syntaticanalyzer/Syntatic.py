@@ -32,9 +32,11 @@ class Syntatic(object):
 
   def parse(self):
     while(len(self.stack) > 0):
+      # print('primeiro ', self.stack)
       #print(self.stack, end='    ')
       top = self.stack_pop()
       current = self.tokens[self.current_token_index]
+      # print('aqui ', top, current)
       #print(f'current: {current[0]}')
       if self.match(top, current):
         self.jump_maker.analyze(current, self.current_token_index)
@@ -43,7 +45,10 @@ class Syntatic(object):
       elif self.is_non_terminal(top):
         self.__expand_production(top, current)
       else:
-        raise Exception(f'SyntaticError: Expecting {top[0]}, got {current[0]}.')
+        # raise Exception(f'SyntaticError: Expecting {top[0]}, got {current[0]}.')
+        print(f'SyntaticError: Expecting {top[0]}, got {current[0]}.')
+      # print('final ', self.stack)
+      # print("\n\n\n")
     return self.scope_manager
 
   def is_non_terminal(self, top):
@@ -51,8 +56,13 @@ class Syntatic(object):
 
   def __expand_production(self, top, current):
     production = self.__get_production(top, current)
+    
     if production == '':
-      raise Exception(f'SyntaticError: {self.stack}\n{current}')
+      # raise Exception(f'SyntaticError: {self.stack}\n{current}')
+      print(f'SyntaticError: {self.stack}\n{current}')
+
+      production = production.split(' ')[::-1]
+      self.stack_push(production)
     elif production == '#':
       pass
     else:

@@ -6,6 +6,7 @@ sys_path.append(main_path)
 
 from lexicalanalyzer import Lexical
 from syntaticanalyzer import Syntatic
+from semanthicanalyzer import Semanthic
 
 if main_path[len(main_path) - 1] != '/':
   main_path += '/'
@@ -19,6 +20,9 @@ def main(file_path=main_path+'teste.dpr', output_early=True):
     scope_manager = Syntatic(tokens).parse()
     print('Análise Sintática bem sucedida. A tabela de símbolos está disponível no arquivo symbols-table.log')
     if output_early: generate_output(tokens, scope_manager)
+    Semanthic(tokens, scope_manager).analyze()
+    if not output_early: generate_output(tokens, scope_manager)
+    print('Análise Semântica bem sucedida.')
   return tokens, scope_manager
 
 def generate_output(tokens, scope_manager):
